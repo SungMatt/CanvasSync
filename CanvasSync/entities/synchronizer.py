@@ -96,9 +96,12 @@ class Synchronizer(CanvasEntity):
             self.entities[course_information[u"id"]] = []
 
             # Create Course object
-            course = Course(course_information,
-                            parent=self,
-                            settings=self.settings)
+            try:
+                course = Course(course_information,
+                                parent=self,
+                                settings=self.settings
+            except KeyError:
+                continue
             self.add_child(course)
 
     def walk(self):
